@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Recipe</h1>
+    <form action="/recipe/add" method="post">
+        <div id="parent"></div>
+    </form>
+</body>
+<script>
+    const display = (data) => {
+    data.map((ele) => {
+      let name = document.createElement("h1");
+      name.innerHTML = ele.name;
+      let description = document.createElement("h2");
+      description.innerHTML = ele.innerHTML;
+      let ptime = document.createElement("h3");
+      ptime.innerHTML = ele.preparationTime;
+      let ctime = document.createElement("h3");
+      ctime.innerHTML = ele.cookingTime;
+      let url = document.createElement("img");
+      url.src = ele.imageUrl;
+      let country = document.createElement("p");
+      country.innerHTML = ele.country;
+      let veg = document.createElement("p");
+      veg.innerHTML = ele.veg;
+      let id = document.createElement("h3");
+      id.innerHTML = ele.id;
+      let div = document.createElement("div");
+      div.append(name, description, ptime, ctime, url, country, veg, id);
+      document.getElementById("parent").append(div);
+    })
+};
+
+  fetch("http://localhost:8090/recipe/all")
+    .then((res) => res.json())
+    .then((response) => display(response));
+</script>
+</html>
